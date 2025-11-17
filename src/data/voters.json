@@ -1,25 +1,132 @@
 [
-  { "voterId": "ADMIN001", "password": "admin123", "role": "admin" },
-  { "voterId": "ADMIN002", "password": "admin456", "role": "admin" },
-  { "voterId": "VOTER001", "password": "pass001", "role": "user" },
-  { "voterId": "VOTER002", "password": "pass002", "role": "user" },
-  { "voterId": "VOTER003", "password": "pass003", "role": "user" },
-  { "voterId": "VOTER004", "password": "pass004", "role": "user" },
-  { "voterId": "VOTER005", "password": "pass005", "role": "user" },
-  { "voterId": "VOTER006", "password": "pass006", "role": "user" },
-  { "voterId": "VOTER007", "password": "pass007", "role": "user" },
-  { "voterId": "VOTER008", "password": "pass008", "role": "user" },
-  { "voterId": "VOTER009", "password": "pass009", "role": "user" },
-  { "voterId": "VOTER010", "password": "pass010", "role": "user" },
-  { "voterId": "VOTER011", "password": "pass011", "role": "user" },
-  { "voterId": "VOTER012", "password": "pass012", "role": "user" },
-  { "voterId": "VOTER013", "password": "pass013", "role": "user" },
-  { "voterId": "VOTER014", "password": "pass014", "role": "user" },
-  { "voterId": "VOTER015", "password": "pass015", "role": "user" },
-  { "voterId": "VOTER016", "password": "pass016", "role": "user" },
-  { "voterId": "VOTER017", "password": "pass017", "role": "user" },
-  { "voterId": "VOTER018", "password": "pass018", "role": "user" },
-  { "voterId": "VOTER019", "password": "pass019", "role": "user" },
-  { "voterId": "VOTER020", "password": "pass020", "role": "user" }
+  {
+    "voterId": "ADMIN001",
+    "password": "admin123",
+    "role": "admin"
+  },
+  {
+    "voterId": "ADMIN002",
+    "password": "admin456",
+    "role": "admin"
+  },
+  {
+    "voterId": "VOTER001",
+    "password": "pass001",
+    "role": "user"
+  },
+  {
+    "voterId": "VOTER002",
+    "password": "pass002",
+    "role": "user"
+  },
+  {
+    "voterId": "VOTER003",
+    "password": "pass003",
+    "role": "user"
+  },
+  {
+    "voterId": "VOTER004",
+    "password": "pass004",
+    "role": "user"
+  },
+  {
+    "voterId": "VOTER005",
+    "password": "pass005",
+    "role": "user"
+  },
+  {
+    "voterId": "VOTER006",
+    "password": "pass006",
+    "role": "user"
+  },
+  {
+    "voterId": "VOTER007",
+    "password": "pass007",
+    "role": "user"
+  },
+  {
+    "voterId": "VOTER008",
+    "password": "pass008",
+    "role": "user"
+  },
+  {
+    "voterId": "VOTER009",
+    "password": "pass009",
+    "role": "user"
+  },
+  {
+    "voterId": "VOTER010",
+    "password": "pass010",
+    "role": "user"
+  },
+  {
+    "voterId": "VOTER011",
+    "password": "pass011",
+    "role": "user"
+  },
+  {
+    "voterId": "VOTER012",
+    "password": "pass012",
+    "role": "user"
+  },
+  {
+    "voterId": "VOTER013",
+    "password": "pass013",
+    "role": "user"
+  },
+  {
+    "voterId": "VOTER014",
+    "password": "pass014",
+    "role": "user"
+  },
+  {
+    "voterId": "VOTER015",
+    "password": "pass015",
+    "role": "user"
+  },
+  {
+    "voterId": "VOTER016",
+    "password": "pass016",
+    "role": "user"
+  },
+  {
+    "voterId": "VOTER017",
+    "password": "pass017",
+    "role": "user"
+  },
+  {
+    "voterId": "VOTER018",
+    "password": "pass018",
+    "role": "user"
+  },
+  {
+    "voterId": "VOTER019",
+    "password": "pass019",
+    "role": "user"
+  },
+  {
+    "voterId": "VOTER020",
+    "password": "pass020",
+    "role": "user"
+  },
+  {
+    "voterId": "emeterv18@gmail.com",
+    "password": "Nablinmas@12",
+    "role": "user"
+  },
+  {
+    "voterId": "admin@gmail.com",
+    "password": "Nablinmas@12",
+    "role": "admin"
+  },
+  {
+    "voterId": "admin123",
+    "password": "admin123",
+    "role": "user"
+  },
+  {
+    "voterId": "bayo@gmail.com",
+    "password": "1234567890",
+    "role": "user"
+  }
 ]
-

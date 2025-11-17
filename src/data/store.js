@@ -1,13 +1,24 @@
 const fs = require('fs');
 const path = require('path');
 
-const candidates = [
-  { id: 1, name: 'Alice Johnson', party: 'Unity', votes: 0 },
-  { id: 2, name: 'Brian Smith', party: 'Prosperity', votes: 0 },
-  { id: 3, name: 'Carla Gomez', party: 'Progress', votes: 0 },
-];
-
 const voterFilePath = path.join(__dirname, 'voters.json');
+const candidateFilePath = path.join(__dirname, 'candidates.json');
+
+function loadCandidates() {
+  try {
+    const contents = fs.readFileSync(candidateFilePath, 'utf-8');
+    return JSON.parse(contents);
+  } catch (error) {
+    console.warn('Unable to load candidates.json. Falling back to defaults.');
+    return [
+      { id: 1, name: 'Alice Johnson', party: 'Unity', votes: 0 },
+      { id: 2, name: 'Brian Smith', party: 'Prosperity', votes: 0 },
+      { id: 3, name: 'Carla Gomez', party: 'Progress', votes: 0 },
+    ];
+  }
+}
+
+let candidates = loadCandidates();
 
 function loadAllowList() {
   try {
@@ -25,19 +36,23 @@ function persistAllowList() {
   fs.writeFileSync(voterFilePath, JSON.stringify(allowList, null, 2));
 }
 
+function persistCandidates() {
+  fs.writeFileSync(candidateFilePath, JSON.stringify(candidates, null, 2));
+}
+
 const voterLedger = new Map(); // voterId -> candidateId
 
 function listCandidates() {
-  return candidates.map(({ id, name, party }) => ({ id, name, party }));
-}
-
-function listResults() {
   return candidates.map(({ id, name, party, votes }) => ({
     id,
     name,
     party,
     votes,
   }));
+}
+
+function listResults() {
+  return listCandidates();
 }
 
 function findCandidate(candidateId) {
@@ -56,6 +71,7 @@ function recordVote(voterId, candidateId) {
 
   candidate.votes += 1;
   voterLedger.set(voterId, candidateId);
+  persistCandidates();
   return candidate;
 }
 
@@ -80,6 +96,14 @@ function registerVoter(voterId, password, role = 'user') {
   return newVoter;
 }
 
+function addCandidate(name, party) {
+  const nextId = candidates.length ? Math.max(...candidates.map((c) => c.id)) + 1 : 1;
+  const newCandidate = { id: nextId, name, party, votes: 0 };
+  candidates.push(newCandidate);
+  persistCandidates();
+  return newCandidate;
+}
+
 module.exports = {
   listCandidates,
   listResults,
@@ -89,5 +113,6 @@ module.exports = {
   validateVoter,
   registerVoter,
   voterExists,
+  addCandidate,
 };
 

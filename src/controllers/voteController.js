@@ -9,10 +9,15 @@ const getResults = (req, res) => {
 };
 
 const submitVote = (req, res) => {
-  const { voterId, candidateId } = req.body || {};
+  const { candidateId } = req.body || {};
+  const voterId = req.user?.voterId;
 
-  if (!voterId || !candidateId) {
-    return res.status(400).json({ message: 'voterId and candidateId are required' });
+  if (!candidateId) {
+    return res.status(400).json({ message: 'candidateId is required' });
+  }
+
+  if (!voterId) {
+    return res.status(401).json({ message: 'Unauthorized' });
   }
 
   if (store.hasVoted(voterId)) {
@@ -35,9 +40,32 @@ const submitVote = (req, res) => {
   });
 };
 
+const createCandidate = (req, res) => {
+  const { name, party } = req.body || {};
+
+  if (!name || !party) {
+    return res.status(400).json({ message: 'name and party are required' });
+  }
+
+  const candidate = store.addCandidate(name, party);
+  return res.status(201).json({ candidate });
+};
+
+const getVoteStatus = (req, res) => {
+  const voterId = req.user?.voterId;
+
+  if (!voterId) {
+    return res.status(401).json({ message: 'Unauthorized' });
+  }
+
+  return res.json({ hasVoted: store.hasVoted(voterId) });
+};
+
 module.exports = {
   getCandidates,
   getResults,
   submitVote,
+  createCandidate,
+  getVoteStatus,
 };
 

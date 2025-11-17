@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const jwt = require('jsonwebtoken');
+const cors = require('cors');
 
 require('dotenv').config();
 
@@ -8,12 +9,29 @@ const voteRoutes = require('./src/routes/voteRoutes');
 const authRoutes = require('./src/routes/authRoutes');
 
 const app = express();
+app.use(cors({
+  origin: ['http://localhost:8080', 'http://127.0.0.1:8080','https://decentralize-voting-system.onrender.com'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+}));
 app.use(express.json());
 
 
+const getCookieToken = (cookieHeader = '') => {
+  return cookieHeader
+    .split(';')
+    .map((pair) => pair.trim())
+    .filter((pair) => pair.startsWith('auth_token='))
+    .map((pair) => pair.replace('auth_token=', ''))[0];
+};
+
 // Authorization middleware
 const authorizeUser = (req, res, next) => {
-  const token = req.query.Authorization?.split('Bearer ')[1];
+  const headerToken = req.headers.authorization?.split('Bearer ')[1];
+  const queryToken = req.query.Authorization?.split('Bearer ')[1];
+  const cookieToken = getCookieToken(req.headers.cookie || '');
+  const token = headerToken || queryToken || cookieToken;
 
   if (!token) {
     return res.status(401).send('<h1 align="center"> Login to Continue </h1>');
@@ -37,6 +55,14 @@ app.get('/', (req, res) => {
 
 app.get('/js/login.js', (req, res) => {
   res.sendFile(path.join(__dirname, 'src/js/login.js'))
+});
+
+app.get('/js/admin.js', (req, res) => {
+  res.sendFile(path.join(__dirname, 'src/js/admin.js'))
+});
+
+app.get('/js/vote.js', (req, res) => {
+  res.sendFile(path.join(__dirname, 'src/js/vote.js'))
 });
 
 app.get('/css/login.css', (req, res) => {

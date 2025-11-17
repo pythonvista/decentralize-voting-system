@@ -1,6 +1,17 @@
 const jwt = require('jsonwebtoken');
 const store = require('../data/store');
 
+const COOKIE_OPTIONS = {
+  httpOnly: false,
+  sameSite: 'lax',
+  secure: process.env.NODE_ENV === 'production',
+  path: '/',
+};
+
+const setAuthCookie = (res, token) => {
+  res.cookie('auth_token', token, COOKIE_OPTIONS);
+};
+
 const login = (req, res) => {
   const { voterId, password } = req.body || {};
 
@@ -18,6 +29,8 @@ const login = (req, res) => {
     process.env.SECRET_KEY,
     { algorithm: 'HS256', expiresIn: '2h' },
   );
+
+  setAuthCookie(res, token);
 
   return res.json({
     token,
@@ -46,6 +59,8 @@ const register = (req, res) => {
     process.env.SECRET_KEY,
     { algorithm: 'HS256', expiresIn: '2h' },
   );
+
+  setAuthCookie(res, token);
 
   return res.status(201).json({
     token,
