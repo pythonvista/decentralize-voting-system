@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 const voteRoutes = require('./src/routes/voteRoutes');
+const authRoutes = require('./src/routes/authRoutes');
 
 const app = express();
 app.use(express.json());
@@ -74,6 +75,7 @@ app.get('/dist/app.bundle.js', (req, res) => {
   res.sendFile(path.join(__dirname, 'src/dist/app.bundle.js'));
 });
 
+app.use('/api/v1', authRoutes);
 app.use('/api/v1', voteRoutes);
 
 // Serve the favicon.ico file
